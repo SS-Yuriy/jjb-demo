@@ -4,7 +4,7 @@
       - git:
          url: https://github.com/Seinth/DemoSL.git
          branches:
-           - origin/master
+           - master
 
 - job:
     name: Refactoring
@@ -12,12 +12,13 @@
 
 - project:
     name: Refactoring
-    script_pref: ''
+    script_pref: 'pipelines/'
     script_suff: '.pipeline'
     job_name:
       - 2First
       - 2Second
       - 3all
+
     jobs:
         - '{name}/{job_name}'
 
