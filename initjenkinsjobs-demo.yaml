@@ -1,0 +1,31 @@
+- scm:
+    name: CI-SharedLibrary
+    scm:
+      - git:
+         url: https://github.com/Seinth/DemoSL.git
+         branches:
+           - origin/master
+
+- job:
+    name: Refactoring
+    project-type: folder
+
+- project:
+    name: Refactoring
+    script_pref: ''
+    script_suff: '.pipeline'
+    job_name:
+      - 2First
+      - 2Second
+      - 3all
+    jobs:
+        - '{name}/{job_name}'
+
+- job-template:
+    name: '{name}/{job_name}'
+    project-type: pipeline
+    pipeline-scm:
+      scm:
+        - CI-SharedLibrary
+      script-path: '{script_pref}{job_name}{script_suff}'
+      lightweight-checkout: true
